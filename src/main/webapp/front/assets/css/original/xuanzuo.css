@@ -1,0 +1,108 @@
+img{
+	width: 100%;
+	height: 400px;
+	object-fit: cover;
+	margin-bottom: 20px;
+}
+h2{
+	font-size: 20px;
+	color: #000;
+	font-weight: bold;
+}
+.tip{
+	display: flex;
+	margin-top: 50px;
+}
+.tip .kexuan,.tip .yixuan,.tip .yishou{
+	display: flex;
+	align-items: center;
+	margin-right: 40px;
+}
+.tip .kexuan #status, .tip .yixuan #status, .tip .yishou #status{
+	width: 30px;
+	height: 30px;
+	border-radius: 5px;
+	margin-right: 10px;
+}
+.tip .kexuan #status{
+	background-color: #CCCCCC;
+}
+.tip .yixuan #status{
+	background-color: #569fe8;
+}
+.tip .yishou #status{
+	background-color: #FE4847;
+}
+.zuowei-list{
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 30px;
+}
+.zuowei-item{
+	width: calc(100%/10);
+	cursor: pointer;
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 30px;
+}
+.zuowei-item .status{
+	width: 30px;
+	height: 30px;
+	background-color: #CCCCCC;
+	border-radius: 5px;
+	margin-bottom: 10px;
+}
+.zuowei-item .yixuan{
+	background-color: #569fe8;
+}
+.zuowei-item .yishou{
+	background-color: #FE4847;
+}
+.info p{
+	font-weight: 600;
+	color: #000;
+	font-size: 20px
+}
+.info ul li {
+	display: inline-flex;
+	flex-flow: column;
+	justify-content: center;
+	align-items: center;
+	margin-right: 20px;
+}
+.info ul li div{
+	display: inline-flex;
+	justify-content: center;
+	background-color: #569fe8;
+	color: #fff;
+	border-radius: 5px;
+	padding: 10px 20px;
+	margin-bottom: 10px;
+}
+.info ul li span{
+	color: #FE4847;
+	cursor: pointer;
+}
+.jiesuan{
+	margin-top: 40px;
+	display: flex;
+	justify-content: space-between;
+}
+.jiesuan .price .text{
+	font-size: 22px;
+	color: #000;
+	font-weight: 600;
+}
+.jiesuan .price .price{
+	color: #FE4847;
+	font-size: 22px;
+}
+#buy-btn{
+	padding: 10px 20px;
+	background-color: #569fe8;
+	border-radius: 10px;
+	color: #fff;
+	cursor: pointer;
+}

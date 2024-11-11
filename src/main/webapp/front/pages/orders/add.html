@@ -1,0 +1,439 @@
+<!doctype html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>boo02</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="../../assets/css/original/bootstrap.min.css">
+		<!-- font-awesome css -->
+		<link rel="stylesheet" href="../../assets/css/original/font-awesome.min.css">
+		<!-- style css -->
+		<link rel="stylesheet" href="../../assets/css/original/style.css">
+		<!-- modernizr js -->
+		<link rel="stylesheet" href="../../layui/css/layui.css">
+		<style type="text/css">
+			.layui-form-label{
+				width: 100px;
+			}
+			.form-box{
+				padding-top: 90px;
+				padding-bottom: 20px;
+				width: 100%;
+				background-color: #f8f8f8;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+			.form-box .form-content{
+				width: 50%;
+				height: auto;
+				background: #FFF;
+				padding: 40px 10%;
+				position: relative;
+			}
+			.form-box .form-content .close-btn{
+				position: absolute;
+				width: auto!important;
+				padding: 10px;
+				background: #CCCCCC!important;
+				color: #444;
+				top: 40px;
+				right: 10%;
+			}
+			.form-box .form-content .close-btn:hover{
+				width: auto!important;
+				padding: 10px;
+				background: #CCCCCC!important;
+			}
+			.form-box .form-content h3{
+				width: 100%;
+				text-align: center;
+				margin-bottom: 40px;
+			}
+			.form-box .form-content .input-item{
+				margin-bottom: 20px;
+				display: flex;
+			}
+			.form-box .form-content .input-item input{
+				height: 50px;
+				line-height: 50px;
+				flex: 1;
+			}
+			.form-box .form-content .input-item .input-name{
+				padding: 0;
+				width: 100px;
+				height: 50px;
+				line-height: 50px;
+			}
+			.form-box .form-content .input-item img{
+				width: 150px;
+				height: 150px;
+				border-radius: 10px;
+				margin-left: 20px;
+				object-fit: cover;
+			}
+			.form-box .form-content button{
+				background: #FE4847;
+				color: #fff;
+				border: 0;
+				width: 100%;
+			}
+			.form-box .form-content button:hover {
+			    background: #292929;
+			    color: #fff;
+			}
+			.layui-upload-img{
+				width: 100px;
+				height: 100px;
+				object-fit: cover;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="form-box layui-form" lay-filter="layform">
+				<div class="form-control form-content">
+					<h3>订单填写</h3>
+					<div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">订单id</label>
+							<div class="layui-input-block">
+								<input v-model="detail.orderid" type="text" name="" placeholder="请输入订单id" autocomplete="off" class="layui-input" readonly="readonly">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品表名</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.tablename" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入商品表名" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品id</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.goodid" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入商品id" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品名称</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.goodname" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入商品名称" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">商品图片</label>
+							<div class="layui-input-block">
+								<button type="button" class="layui-btn" id="pictureupload-img" v-if="!detail.picture">上传图片</button>
+								<div class="layui-upload-list" v-if="detail.picture">
+									<img class="layui-upload-img" id="pictureimg-temp" :src="detail.picture?detail.picture.split(',')[0]:''">
+									<p id="demoText"></p>
+								</div>
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">购买数量</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.buynumber" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入购买数量" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">价格/积分</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.price" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入价格/积分" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">折扣价格</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.discountprice" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入折扣价格" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">总价格/总积分</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.total" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入总价格/总积分" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">折扣总价格</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.discounttotal" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入折扣总价格" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">支付类型（1：现金 2：积分）</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.type" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入支付类型（1：现金 2：积分）" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">状态</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.status" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入状态" class="layui-input">
+							</div>
+						</div>
+						<div class="layui-form-item">
+							<label class="layui-form-label">地址</label>
+							<div class="layui-input-block">
+							  <input v-model="detail.address" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入地址" class="layui-input">
+							</div>
+						</div>
+					</div>
+					<button type="button" class="btn btn-default" @click="onConfirmTap">提交</button>
+				</div>
+			</div>
+		</div>
+		<!-- jquery latest version -->
+		<script src="../../assets/js/relys/jquery-1.12.0.min.js"></script>
+		<!-- all js here -->
+		<!-- bootstrap js -->
+		<script src="../../assets/js/relys/bootstrap.min.js"></script>
+		<!-- meanmenu js -->
+		<script src="../../assets/js/relys/jquery.meanmenu.js"></script>
+		<!-- jquery-ui js -->
+		<script src="../../assets/js/relys/jquery-ui.min.js"></script>
+		<script src="../../assets/jquery-ui.js"></script>
+		
+		<!-- vue js -->
+		<script src="../../assets/js/vue.min.js"></script>
+		<script src="../../assets/js/api/api.js"></script>
+		<script src="../../assets/js/api/tplist.js"></script>
+		<script src="../../assets/js/api/defaultuser.js"></script>
+		<script src="../../assets/js/relys/utils.js"></script>
+		<script src="../../assets/js/relys/storage.js"></script>
+		<script src="../../layui/layui.js"></script>
+		<script src="../../assets/js/validate.js"></script>
+
+
+		<script type="text/javascript">
+			var app = new Vue({
+				el: "#app",
+				data: {
+					crosstable: "",
+					crosstableobj: {},
+					detail: {
+						orderid: (new Date()).getTime()+"",
+						tablename: "",
+						userid: "",
+						goodid: "",
+						goodname: "",
+						picture: "",
+						buynumber: "",
+						price: "",
+						discountprice: "",
+						total: "",
+						discounttotal: "",
+						type: "",
+						status: "",
+						address: "",
+					},
+				},
+				computed: {
+				},
+				updated() {
+				},
+				async created() {
+					var id = getParam('id')
+					var tablename = getParam('tablename')
+					this.crosstable = tablename
+					if(tablename){
+						var cross = JSON.parse(localStorage.getItem("crossObj"))
+						this.crosstableobj = cross
+						for(var key in cross){
+							if("orderid" == key){
+								this.detail[key] = cross[key]
+							}
+							if("tablename" == key){
+								this.detail[key] = cross[key]
+							}
+							if("userid" == key){
+								this.detail[key] = cross[key]
+							}
+							if("goodid" == key){
+								this.detail[key] = cross[key]
+							}
+							if("goodname" == key){
+								this.detail[key] = cross[key]
+							}
+							if("picture" == key){
+								this.detail[key] = cross[key]
+							}
+							if("buynumber" == key){
+								this.detail[key] = cross[key]
+							}
+							if("price" == key){
+								this.detail[key] = cross[key]
+							}
+							if("discountprice" == key){
+								this.detail[key] = cross[key]
+							}
+							if("total" == key){
+								this.detail[key] = cross[key]
+							}
+							if("discounttotal" == key){
+								this.detail[key] = cross[key]
+							}
+							if("type" == key){
+								this.detail[key] = cross[key]
+							}
+							if("status" == key){
+								this.detail[key] = cross[key]
+							}
+							if("address" == key){
+								this.detail[key] = cross[key]
+							}
+						}
+																																																																																																																																																																																			}else if(id){
+						await this.getDetail(id, tablename)
+					}
+					
+
+				},
+				methods: {
+					onPageTap(url) {
+						window.location.href = url
+					},
+					updateTap(tablename, data){
+						return new Promise((resolve) => {
+							updateFun(tablename, data, (res) => {
+								if(res&&res.code==0){
+									console.log("更新成功")
+									resolve(res)
+								}
+							})
+						})
+						
+					},
+					onConfirmTap(){
+						if(!this.detail.orderid){
+							alert(`订单id不能为空`);
+							return
+						}
+						if(!this.detail.goodid){
+							alert(`商品id不能为空`);
+							return
+						}
+						if(!this.detail.buynumber){
+							alert(`购买数量不能为空`);
+							return
+						}
+					if(!isIntNumer(this.detail.buynumber)){
+						alert(`购买数量应输入整数`);
+						return
+					}
+						if(!this.detail.price){
+							alert(`价格/积分不能为空`);
+							return
+						}
+					if(!isNumber(this.detail.price)){
+						alert(`价格/积分应输入数字`);
+						return
+					}
+					if(!isNumber(this.detail.discountprice)){
+						alert(`折扣价格应输入数字`);
+						return
+					}
+						if(!this.detail.total){
+							alert(`总价格/总积分不能为空`);
+							return
+						}
+					if(!isNumber(this.detail.total)){
+						alert(`总价格/总积分应输入数字`);
+						return
+					}
+					if(!isNumber(this.detail.discounttotal)){
+						alert(`折扣总价格应输入数字`);
+						return
+					}
+					if(!isIntNumer(this.detail.type)){
+						alert(`支付类型（1：现金 2：积分）应输入整数`);
+						return
+					}
+						addFun("orders", this.detail, (res) => {
+							if(res&&res.code==0){
+								alert("提交成功")
+								window.history.go(-1);
+							}
+						})
+					},
+
+
+					getDetail(tablename, id) {
+						return new Promise((resolve) => {
+						goodsInfo(tablename, id, (res) => {
+							this.detail = res.data
+							resolve(res)
+						})
+						})
+					}
+				}
+			})
+ 			$(function(){
+
+
+
+
+
+
+
+
+
+
+
+
+				layui.use('upload', function(){
+					var $ = layui.jquery
+					,upload = layui.upload;
+					//普通图片上传
+					var uploadInst = upload.render({
+						elem: '#pictureupload-img'
+						,url: baseurl+"file/upload" //改成您自己的上传接口
+						,headers: {
+							Token: getStorage("Token")
+						}
+						,before: function(obj){
+						  //预读本地文件示例，不支持ie8
+						  obj.preview(function(index, file, result){
+							$('#pictureimg-temp').attr('src', result); //图片链接（base64）
+						  });
+						}
+						,done: function(res){
+						  //如果上传失败
+						  if(res.code > 0){
+							return layer.msg('上传失败');
+						  }else{
+							  app.detail.picture = baseurl+"/upload/"+res.file
+							  return layer.msg('上传成功');
+						  }
+						  //上传成功
+						}
+					})
+				});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				layui.use(['form','layedit'], function(){
+					var form = layui.form,
+						layedit = layui.layedit,
+						$ = layui.jquery,
+						layer = layui.layer;
+				        
+				});
+			});
+		</script>
+	</body>
+</html>

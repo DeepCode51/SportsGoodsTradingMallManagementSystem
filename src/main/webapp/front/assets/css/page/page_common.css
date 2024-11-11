@@ -1,0 +1,56 @@
+.iconfont {
+    font-size:16px;
+}
+
+.icon-you:before {
+    content: ">";
+}
+
+.icon-zuo:before {
+    content: "<";
+}
+
+.icon-most-left:before {
+    content: "<<";
+}
+
+.icon-most-right:before {
+    content: ">>";
+}
+
+.page_common_btn_style{
+    font-family: '微软雅黑';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+	border: 1px solid #ddd;
+    background: #fff;
+    color: #444;
+    margin: 0 3px;
+    font-size:14px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+}
+.page_common_btn_style:hover{
+	background-color: #FE4847;
+	color: #fff!important;
+}
+a.page_common_btn_style:active{
+	color: #fff;
+	border-color: #FE4847;
+	background-color: #FE4847;
+}
+
+.page_btn_box {
+    display: inline-block;
+    margin: 0 10px;
+}
+.page_common_btn_active{
+    color: #fff;
+    border-color: #FE4847;
+	background-color: #FE4847;
+}

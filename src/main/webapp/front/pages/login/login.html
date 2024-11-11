@@ -1,0 +1,156 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Login || Richman</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="shortcut icon" type="image/x-icon" href="../../assets/img/favicon.ico">
+        <!-- Place favicon.ico in the root directory -->
+
+
+		<!-- all css here -->
+		<!-- bootstrap v3.3.6 css -->
+        <link rel="stylesheet" href="../../assets/css/original/bootstrap.min.css">
+		<!-- animate css -->
+        <link rel="stylesheet" href="../../assets/css/original/animate.css">
+		<!-- jquery-ui.min css -->
+        <link rel="stylesheet" href="../../assets/css/original/jquery-ui.min.css">
+		<!-- meanmenu css -->
+        <link rel="stylesheet" href="../../assets/css/original/meanmenu.min.css">
+		<!-- owl.carousel css -->
+        <link rel="stylesheet" href="../../assets/css/original/owl.carousel.css">
+		<!-- font-awesome css -->
+        <link rel="stylesheet" href="../../assets/css/original/font-awesome.min.css">
+		<!-- style css -->
+		<link rel="stylesheet" href="../../assets/css/original/style.css">
+		<!-- responsive css -->
+        <link rel="stylesheet" href="../../assets/css/original/responsive.css">
+		<!-- modernizr js -->
+        <script src="../../assets/js/relys/modernizr-2.8.3.min.js"></script>
+    </head>
+    <body>
+		<div id="app">
+		<!-- page-title-area start -->
+		<div class="page-title-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="title-heading text-center">
+							<h1>登录 PAGE</h1>
+							<p>Ambition does not stand, there is nothing to do</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- page-title-area end -->
+		<!-- login-area start -->
+		<div class="login-area">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3"></div>
+					<div class="col-md-6">
+						<div class="login-content">
+							<h2 class="login-title">登录</h2>
+							<p>Hello,Welcome to your account</p>
+							<div class="form">
+								<label>账号</label>
+								<input v-model="username" type="text" />
+								<label>密码</label>
+								<input v-model="password" type="password" />
+								<div class="login-lost" style="width: 100%;display: flex;justify-content: space-between;">
+									<div style="display: flex;flex-flow: column;line-height: 25px;">
+										<span class="log-rem">
+											<a href="javascript:onPageTap('../yonghu/register.html')">用户注册</a>
+										</span>
+									</div>
+								</div>
+								<div class="checkbox" style="display: flex;">
+								    <div style="margin-right: 40px;display: flex;align-items: center;">
+								      <input style="width: 15px;margin: 0;margin-right: 10px;" type="radio" value="yonghu" v-model="pick">用户
+								    </div>
+								</div>
+								<button class="login-sub" @click="userLogin">登录</button>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3"></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<!-- login-area end -->
+
+		<!-- all js here -->
+		<!-- jquery latest version -->
+        <script src="../../assets/js/relys/jquery-1.12.0.min.js"></script>
+		<!-- bootstrap js -->
+        <script src="../../assets/js/relys/bootstrap.min.js"></script>
+		<!-- owl.carousel js -->
+        <script src="../../assets/js/relys/owl.carousel.min.js"></script>
+		<!-- meanmenu js -->
+        <script src="../../assets/js/relys/jquery.meanmenu.js"></script>
+		<!-- jquery-ui js -->
+        <script src="../../assets/js/relys/jquery-ui.min.js"></script>
+		<!-- wow js -->
+        <script src="../../assets/js/relys/wow.min.js"></script>
+		<!-- plugins js -->
+        <script src="../../assets/js/relys/plugins.js"></script>
+		<!-- main js -->
+        <script src="../../assets/js/relys/main.js"></script>
+		<script src="../../assets/js/vue.js"></script>
+		<script src="../../assets/js/api/api.js"></script>
+		<script src="../../assets/js/api/defaultuser.js"></script>
+		<script type="text/javascript">
+			var app = new Vue({
+				el: "#app",
+				data: {
+					pick: "",
+					yonghu: "yonghuming",
+					yonghuzn: "用户",
+					username: '',
+					password: ''
+				},
+				methods: {
+					userLogin(){
+						if(!this.pick){
+							alert("请选择登录用户")
+							return
+						}
+
+						var data = {
+							username: this.username,
+							password: this.password,
+							mima: this.password,
+						}
+						data[`${this[this.pick]}`] = this.username
+						login(`${this.pick}`, data, (res)=>{
+							if(res.code==0){
+								alert("登录成功")
+								localStorage.setItem('Token', res.token)
+								localStorage.setItem("role", this[`${this.pick}zn`].split("信息")[0])
+								localStorage.setItem('sessionTable', this.pick)
+								localStorage.setItem('adminName', this.username)
+								session(this.pick, (res) => {
+									if(res.code==0){
+										var userid = res.data.id
+										localStorage.setItem('userid', userid)
+										window.location.href = `../personal/personal.html`
+									}
+								})
+								
+							}
+						})
+					}
+				}
+			})
+			function onPageTap(url) {
+				console.log(url)
+				window.location.href = url;
+			}
+		</script>
+    </body>
+</html>
